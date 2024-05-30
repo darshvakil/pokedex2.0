@@ -1,0 +1,122 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* General Body Styling */
+body.details-page {
+    font-family: 'Outfit', sans-serif;
+    background-color: #ff0c0c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-image: url(images/pikachu.png);
+    background-repeat: repeat-x;
+    background-position: center;
+}
+
+/* Pokedex Container Styling */
+#pokemon-details-container {
+    background-color: #000000;
+    color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    max-width: 1000px;
+    padding: 20px;
+    overflow: auto;
+    background-image: url(images/pokeball.png);
+    background-position: center; 
+    background-image: cross-fade(10px);
+}
+
+/* Pokémon Name Styling */
+.pokemon-name {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Pokémon Image Styling */
+.pokemon-image img {
+    display: block;
+    margin: auto;
+    height: 200px; 
+    width: 200px;
+    border: white 2px solid; 
+    box-shadow: white 2px 2px;  
+}
+
+/* Pokémon Info Styling */
+.pokemon-info p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* Section Headers */
+.pokemon-stats h2, .pokemon-abilities h2 {
+    margin-bottom: 10px;
+}
+
+/* Stats List */
+.stats-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Stat Item Styling */
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+/* Stat Name Styling */
+.stat-name {
+    flex: 1;
+    text-align: left;
+}
+
+/* Stat Bar Container */
+.stat-bar {
+    flex: 3;
+    height: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+/* Stat Bar Fill */
+.stat-bar-fill {
+    height: 100%;
+}
+
+/* Stat Value Styling */
+.stat-value {
+    flex: 1;
+    text-align: right;
+}
+
+/* Abilities List */
+.abilities-list {
+    list-style: none;
+    padding: 0;
+    font-size: large;
+}
+
+#back-to-pokedex {
+    height: 50px;
+    width: 50px;
+    background-color: #000000;
+    color: white;
+    border: white 2px solid;
+}
+
+#back-to-pokedex:hover {
+    height: 60px;
+    width: 60px;
+}

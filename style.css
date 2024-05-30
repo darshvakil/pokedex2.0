@@ -1,0 +1,133 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* General Body Styling */
+body.search-page {
+    font-family: 'Outfit', sans-serif;
+    background-color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    overflow-y: scroll;
+    background-image: url(images/pikachu.png);
+    background-repeat: repeat-x 500px;
+}
+
+
+/* Pokedex Container Styling */
+#pokedex-search {
+    background: rgb(196, 196, 196);
+    background-image: url(images/pokeball.png);
+    background-repeat: repeat-y;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    overflow: auto; /* Allow scrolling if content overflows */
+}
+
+/* Pokemon List Styling */
+#pokemon-list-search {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Search Input Styling */
+#searchInput {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pokemon Item Styling */
+.pokemon-render-result-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pokemon-render-result-container:hover {
+    transform: scale(1.05);
+}
+
+.search-pokemon-image {
+    width: 100px;
+    height: 100px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.type-container {
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+/* Back to Top Button */
+#back-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s;
+}
+
+#back-to-top-button.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+  }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Details</title>
+    <link rel="stylesheet" href="pokemon.css">
+</head>
+<body class="details-page">
+    <div id="pokemon-details-container">
+        <button id="back-to-pokedex" class="hide" onclick="redirectPokedex()">Back</button>
+        <h1 class="pokemon-name" id="pokemon-name"></h1>
+        <div class="pokemon-image" id="pokemon-image"></div>
+        <div class="pokemon-info" id="pokemon-info">
+            <p id="pokemon-description"></p>
+            <p id="pokemon-weight"></p>
+            <p id="pokemon-height"></p>
+            <div class="pokemon-stats" id="pokemon-stats">
+                <h2>Base Stats</h2>
+                <div class="stats-list" id="stats-list"></div>
+            </div>
+            <div class="pokemon-abilities" id="pokemon-abilities">
+                <h2>Abilities</h2>
+                <ul class="abilities-list" id="abilities-list"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="pokemon.js"></script>
+</body>
+</html>
