@@ -1,44 +1,83 @@
-// get the Pokemon ID from the URL  
+// Get the search query from the URL or input
 const urlParams = new URLSearchParams(window.location.search);
-const pokemonId = urlParams.get('id');
+const searchQuery = urlParams.get('query')?.toLowerCase(); // Use 'query' parameter for name search
 
-// function to fetch Pokemon details
-const fetchPokemonDetails = async (pokemonId) => {
+// Function to fetch the list of Pokémon and filter by the search query
+const fetchPokemonByName = async (query) => {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        if (!query) {
+            throw new Error('No search query provided');
+        }
+
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000`);
         if (!response.ok) {
-            throw new Error('Failed to fetch Pokemon details');
+            throw new Error('Failed to fetch Pokémon list');
+        }
+
+        const pokemonList = await response.json();
+        const matchingPokemon = pokemonList.results.find(pokemon =>
+            pokemon.name.toLowerCase().startsWith(query)
+        );
+
+        if (!matchingPokemon) {
+            throw new Error(`No Pokémon found starting with "${query}"`);
+        }
+
+        // Fetch and display details of the first matching Pokémon
+        fetchPokemonDetails(matchingPokemon.url);
+    } catch (error) {
+        console.error('Error fetching Pokémon by name:', error);
+        displayErrorMessage(error.message);
+    }
+};
+
+// Function to fetch and display details of a specific Pokémon
+const fetchPokemonDetails = async (url) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Failed to fetch Pokémon details');
         }
         const pokemonData = await response.json();
         displayPokemonDetails(pokemonData);
     } catch (error) {
-        console.error('Error fetching Pokemon details:', error);
+        console.error('Error fetching Pokémon details:', error);
     }
 };
 
-// function to display Pokemon details
+// Function to display error messages
+const displayErrorMessage = (message) => {
+    const container = document.getElementById('pokemon-container');
+    if (container) {
+        container.innerHTML = `<div class="error-message">${message}</div>`;
+    }
+};
+
+// Function to display Pokémon details
 const displayPokemonDetails = (pokemon) => {
-    const pokemonNameElement = document.getElementById('pokemon-name'); //name
-    const pokemonImageElement = document.getElementById('pokemon-image'); //image
-    const pokemonDescriptionElement = document.getElementById('pokemon-description'); //descp
-    const pokemonWeightElement = document.getElementById('pokemon-weight'); //weight
-    const pokemonHeightElement = document.getElementById('pokemon-height'); //height
-    const statsListElement = document.getElementById('stats-list'); //stats list
-    const abilitiesListElement = document.getElementById('abilities-list'); //abilities list
+    const pokemonNameElement = document.getElementById('pokemon-name'); // Name
+    const pokemonImageElement = document.getElementById('pokemon-image'); // Image
+    const pokemonDescriptionElement = document.getElementById('pokemon-description'); // Description
+    const pokemonWeightElement = document.getElementById('pokemon-weight'); // Weight
+    const pokemonHeightElement = document.getElementById('pokemon-height'); // Height
+    const statsListElement = document.getElementById('stats-list'); // Stats list
+    const abilitiesListElement = document.getElementById('abilities-list'); // Abilities list
 
     if (pokemonNameElement && pokemonImageElement && statsListElement && abilitiesListElement) {
-        pokemonNameElement.textContent = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1); //uppcase first char of pkmn name
+        pokemonNameElement.textContent =
+            pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1); // Capitalize the name
+
         const pokemonImage = document.createElement('img');
-        pokemonImage.src = pokemon.sprites.front_default;
+        pokemonImage.src = pokemon.sprites.front_default || 'fallback-image.png'; // Add fallback image
+        pokemonImage.alt = pokemon.name;
         pokemonImageElement.innerHTML = '';
         pokemonImageElement.appendChild(pokemonImage);
 
-        pokemonDescriptionElement.textContent = "Species: " + pokemon.species.name; 
-        pokemonWeightElement.textContent = "Weight: " + (pokemon.weight / 10) + " kg";
-        pokemonHeightElement.textContent = "Height: " + (pokemon.height / 10) + " m";
+        pokemonDescriptionElement.textContent = 'Species: ' + pokemon.species.name;
+        pokemonWeightElement.textContent = 'Weight: ' + (pokemon.weight / 10) + ' kg';
+        pokemonHeightElement.textContent = 'Height: ' + (pokemon.height / 10) + ' m';
 
-
-        //for each stat make stat item and assign value
+        // Display stats
         statsListElement.innerHTML = '';
         pokemon.stats.forEach(stat => {
             const statItem = document.createElement('div');
@@ -68,7 +107,7 @@ const displayPokemonDetails = (pokemon) => {
             statsListElement.appendChild(statItem);
         });
 
-        //pokemon ability
+        // Display abilities
         abilitiesListElement.innerHTML = '';
         pokemon.abilities.forEach(ability => {
             const abilityItem = document.createElement('li');
@@ -76,11 +115,11 @@ const displayPokemonDetails = (pokemon) => {
             abilitiesListElement.appendChild(abilityItem);
         });
     } else {
-        console.error('Failed to find HTML elements for displaying Pokemon details');
+        console.error('Failed to find HTML elements for displaying Pokémon details');
     }
 };
 
-//Color stat bar based on stat
+// Color stat bar based on stat
 const getStatColor = (stat) => {
     if (stat <= 50) return 'red';
     if (stat <= 70) return 'orange';
@@ -88,12 +127,10 @@ const getStatColor = (stat) => {
     return 'green';
 };
 
-//Back button go back
+// Redirect to Pokédex
 function redirectPokedex() {
-    const url = `index.html?`;
-    window.location.href = url;
-    
+    history.back();
 }
 
-// Fetch and display Pokemon details
-fetchPokemonDetails(pokemonId);
+// Fetch and display Pokémon details based on search query
+fetchPokemonByName(searchQuery);
