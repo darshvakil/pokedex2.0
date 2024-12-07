@@ -15,7 +15,7 @@ const fetchPokemonByName = async (query) => {
         }
 
         const pokemonList = await response.json();
-        const matchingPokemon = pokemonList.results.find(pokemon =>
+        const matchingPokemon = pokemonList.results.filter(pokemon =>
             pokemon.name.toLowerCase().startsWith(query)
         );
 
